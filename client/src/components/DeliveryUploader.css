@@ -1,0 +1,115 @@
+/* Container */
+.container {
+  max-width: 44rem; /* 700px */
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.05); /* 10px 30px */
+}
+
+/* Section title */
+.title {
+  font-size: 1.75rem; /* 28px */
+  font-weight: 700;
+  color: #1f2937; /* Tailwind gray-800 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+/* Label */
+.label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151; /* Tailwind gray-700 */
+  margin-bottom: 0.5rem;
+}
+
+/* Input field */
+.input {
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  background-color: #f9fafb; /* gray-50 */
+  border: 0.0625rem solid #d1d5db; /* 1px gray-300 */
+  border-radius: 0.5rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input:focus {
+  border-color: #3b82f6; /* blue-500 */
+  box-shadow: 0 0 0 0.1875rem rgba(59, 130, 246, 0.3); /* 3px ring */
+  outline: none;
+}
+
+/* Layout for rows */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-row > div {
+  flex: 1;
+}
+
+/* Single input group spacing */
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
+/* Submit Button */
+.button {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(to right, #3b82f6, #2563eb);
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  box-shadow: 0 0.25rem 1.25rem rgba(59, 130, 246, 0.2);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+  background: linear-gradient(to right, #2563eb, #1d4ed8);
+  transform: translateY(-0.125rem);
+}
+
+/* File Upload */
+.file-box {
+  border: 0.1875rem dashed #d1d5db; /* 3px */
+  border-radius: 1rem;
+  padding: 3rem;
+  text-align: center;
+  background-color: #f9fafb;
+  transition: border-color 0.3s, background-color 0.3s;
+  margin-bottom: 2rem;
+}
+
+.file-box:hover {
+  border-color: #3b82f6;
+  background-color: #eff6ff;
+}
+
+.file-info {
+  text-align: center;
+  font-size: 1.125rem; /* 18px */
+  font-weight: 500;
+}
+
+.file-selected {
+  color: #16a34a; /* green-600 */
+  font-weight: bold;
+}
+
+.file-empty {
+  color: #6b7280; /* gray-500 */
+} 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './DeliveryUploader.css';
 
 export default function DeliveryUploader() {
   const [form, setForm] = useState({
@@ -56,7 +57,7 @@ export default function DeliveryUploader() {
       {/* Manual Entry Form */}
       <div className="card">
         <div className="title">
-          <span style={{ marginRight: '1rem' }}>📋</span>
+          <span style={{ marginRight: '0.5rem' }}>📋</span>
           Manual Delivery Input
         </div>
 
