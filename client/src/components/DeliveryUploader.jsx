@@ -54,82 +54,82 @@ export default function DeliveryUploader() {
   return (
     <div className="max-w-4xl mx-auto space-y-12 p-6">
       {/* Manual Form Section */}
-      <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-12">
+      <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-12">
         <div className="flex items-center justify-center mb-12">
           <span className="text-4xl mr-4">📋</span>
           <h2 className="text-4xl font-bold text-gray-800">Manual Delivery Entry</h2>
         </div>
-  
-        <form onSubmit={handleManualSubmit} className="space-y-8">
+
+        <form onSubmit={handleManualSubmit} className="space-y-0">
           {/* Date + Time */}
-          <div className="flex flex-col lg:flex-row gap-8">
+          <div className="flex flex-col lg:flex-row gap-8 mb-8">
             <div className="flex-1">
-              <label className="block text-xl font-bold text-gray-700 mb-8">Date</label>
+              <label className="block text-lg font-semibold text-gray-700 mb-2">Date</label>
               <input
                 type="date"
                 name="date"
                 value={form.date}
                 onChange={handleChange}
-                className="w-full px-6 py-4 border-2 border-gray-300 rounded-xl text-xl bg-gray-50 hover:bg-white focus:outline-none focus:ring-4 focus:ring-blue-400 focus:border-blue-500"
+                className="w-full px-5 py-3 border border-gray-300 rounded-lg text-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-500 transition"
               />
             </div>
-  
+
             <div className="flex-1">
-              <label className="block text-xl font-bold text-gray-700 mb-8">Time</label>
+              <label className="block text-lg font-semibold text-gray-700 mb-2">Time</label>
               <input
                 type="time"
                 name="time"
                 value={form.time}
                 onChange={handleChange}
-                className="w-full px-6 py-4 border-2 border-gray-300 rounded-xl text-xl bg-gray-50 hover:bg-white focus:outline-none focus:ring-4 focus:ring-blue-400 focus:border-blue-500"
+                className="w-full px-5 py-3 border border-gray-300 rounded-lg text-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-500 transition"
               />
             </div>
           </div>
-  
+
           {/* Address */}
-          <div>
-            <label className="block text-xl font-bold text-gray-700 mb-8">Address</label>
+          <div className="mb-8">
+            <label className="block text-lg font-semibold text-gray-700 mb-2">Address</label>
             <input
               type="text"
               name="address"
               value={form.address}
               onChange={handleChange}
               placeholder="Enter address"
-              className="w-full px-6 py-4 border-2 border-gray-300 rounded-xl text-xl bg-gray-50 hover:bg-white focus:outline-none focus:ring-4 focus:ring-blue-400 focus:border-blue-500"
+              className="w-full px-5 py-3 border border-gray-300 rounded-lg text-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-500 transition"
             />
           </div>
-  
+
           {/* Lat + Lng */}
-          <div className="flex flex-col lg:flex-row gap-8">
+          <div className="flex flex-col lg:flex-row gap-8 mb-8">
             <div className="flex-1">
-              <label className="block text-xl font-bold text-gray-700 mb-8">Latitude</label>
+              <label className="block text-lg font-semibold text-gray-700 mb-2">Latitude</label>
               <input
                 type="text"
                 name="lat"
                 value={form.lat}
                 onChange={handleChange}
                 placeholder="Enter latitude"
-                className="w-full px-6 py-4 border-2 border-gray-300 rounded-xl text-xl bg-gray-50 hover:bg-white focus:outline-none focus:ring-4 focus:ring-blue-400 focus:border-blue-500"
+                className="w-full px-5 py-3 border border-gray-300 rounded-lg text-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-500 transition"
               />
             </div>
-  
+
             <div className="flex-1">
-              <label className="block text-xl font-bold text-gray-700 mb-8">Longitude</label>
+              <label className="block text-lg font-semibold text-gray-700 mb-2">Longitude</label>
               <input
                 type="text"
                 name="lng"
                 value={form.lng}
                 onChange={handleChange}
                 placeholder="Enter longitude"
-                className="w-full px-6 py-4 border-2 border-gray-300 rounded-xl text-xl bg-gray-50 hover:bg-white focus:outline-none focus:ring-4 focus:ring-blue-400 focus:border-blue-500"
+                className="w-full px-5 py-3 border border-gray-300 rounded-lg text-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-500 transition"
               />
             </div>
           </div>
-  
+
           {/* Tip + Total */}
-          <div className="flex flex-col lg:flex-row gap-8">
+          <div className="flex flex-col lg:flex-row gap-8 mb-8">
             <div className="flex-1">
-              <label className="block text-xl font-bold text-gray-700 mb-8">Tip</label>
+              <label className="block text-lg font-semibold text-gray-700 mb-2">Tip</label>
               <input
                 type="number"
                 name="tip"
@@ -137,12 +137,12 @@ export default function DeliveryUploader() {
                 onChange={handleChange}
                 placeholder="0.00"
                 step="0.01"
-                className="w-full px-6 py-4 border-2 border-gray-300 rounded-xl text-xl bg-gray-50 hover:bg-white focus:outline-none focus:ring-4 focus:ring-blue-400 focus:border-blue-500"
+                className="w-full px-5 py-3 border border-gray-300 rounded-lg text-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-500 transition"
               />
             </div>
-  
+
             <div className="flex-1">
-              <label className="block text-xl font-bold text-gray-700 mb-8">Total</label>
+              <label className="block text-lg font-semibold text-gray-700 mb-2">Total</label>
               <input
                 type="number"
                 name="total"
@@ -150,24 +150,24 @@ export default function DeliveryUploader() {
                 onChange={handleChange}
                 placeholder="0.00"
                 step="0.01"
-                className="w-full px-6 py-4 border-2 border-gray-300 rounded-xl text-xl bg-gray-50 hover:bg-white focus:outline-none focus:ring-4 focus:ring-blue-400 focus:border-blue-500"
+                className="w-full px-5 py-3 border border-gray-300 rounded-lg text-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-500 transition"
               />
             </div>
           </div>
-  
+
           {/* Platform */}
-          <div>
-            <label className="block text-xl font-bold text-gray-700 mb-8">Platform</label>
+          <div className="mb-8">
+            <label className="block text-lg font-semibold text-gray-700 mb-2">Platform</label>
             <input
               type="text"
               name="platform"
               value={form.platform}
               onChange={handleChange}
-              placeholder="Uber Eats, DoorDash..."
-              className="w-full px-6 py-4 border-2 border-gray-300 rounded-xl text-xl bg-gray-50 hover:bg-white focus:outline-none focus:ring-4 focus:ring-blue-400 focus:border-blue-500"
+              placeholder="Uber Eats, DoorDash, etc."
+              className="w-full px-5 py-3 border border-gray-300 rounded-lg text-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-500 transition"
             />
           </div>
-  
+
           {/* Submit Button */}
           <button
             type="submit"
@@ -205,5 +205,5 @@ export default function DeliveryUploader() {
         </div>
       </div>
     </div>
-  );  
+  );   
 }
