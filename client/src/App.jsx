@@ -1,5 +1,5 @@
 import React from "react";
-import { useAuth } from "./firebase/authContext";
+import { useAuth } from "./firebase/context.jsx";
 import './App.css';
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
         </>
       ) : (
         <>
-          <h1>StudyHub</h1>
+          <h1>GigWise</h1>
           <button onClick={login}>Sign in with Google</button>
         </>
       )}

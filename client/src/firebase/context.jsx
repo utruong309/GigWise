@@ -13,7 +13,7 @@ const auth = getAuth(app);
 
 export function AuthProvider( {children} ) { //pass the entire App as children
     const [user, setUser] = useState(null); 
-    cosnt [loading, setLoading] = useState(null); 
+    const [loading, setLoading] = useState(null); 
 
     const login = async () => {
         const provider = new GoogleAuthProvider(); //Google popup
