@@ -58,7 +58,7 @@ export default function DeliveryUploader() {
       <div className="card">
         <div className="title">
           <span style={{ marginRight: '0.5rem' }}>📋</span>
-          Manual Delivery Input
+          Manual Entry Form
         </div>
 
         <form onSubmit={handleManualSubmit}>
@@ -112,7 +112,7 @@ export default function DeliveryUploader() {
       {/* CSV Upload Section */}
       <div className="card">
         <div className="title">
-          <span style={{ marginRight: '1rem' }}>📁</span>
+          <span style={{ marginRight: '0.5rem' }}>📁</span>
           Upload CSV File
         </div>
 
