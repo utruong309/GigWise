@@ -1,28 +1,35 @@
 import React from "react";
 import { useAuth } from "./firebase/context.jsx";
 import './App.css';
+import DeliveryUploader from "./components/DeliveryUploader";
 
 function App() {
   const { user, login, logout } = useAuth();
 
   return (
-    <div style={{ textAlign: "center", padding: "2rem" }}>
+    <div className="text-center p-8 font-sans">
       {user ? (
         <>
-          <h2>Welcome, {user.displayName}</h2>
-          <img
-            src={user.photoURL}
-            alt="avatar"
-            width={100}
-            style={{ borderRadius: "50%", margin: "1rem" }}
-          />
-          <br />
-          <button onClick={logout}>Logout</button>
+          <h2 className="text-2xl font-bold">Welcome, {user.displayName}</h2>
+          <button
+            onClick={logout}
+            className="bg-red-500 text-white px-4 py-2 rounded"
+          >
+            Logout
+          </button>
+
+          <hr className="my-8" />
+          <DeliveryUploader />
         </>
       ) : (
         <>
-          <h1>GigWise</h1>
-          <button onClick={login}>Sign in with Google</button>
+          <h1 className="text-3xl font-bold mb-4">GigWise</h1>
+          <button
+            onClick={login}
+            className="bg-green-600 text-white px-6 py-2 rounded"
+          >
+            Sign in with Google
+          </button>
         </>
       )}
     </div>

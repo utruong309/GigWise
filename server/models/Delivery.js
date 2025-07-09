@@ -9,8 +9,7 @@ const DeliverySchema = new mongoose.Schema({
   lng: Number,
   tip: Number,
   total: Number,
-  platform: String,
-  tags: [String],
+  platform: String, 
 });
 
 module.exports = mongoose.model("Delivery", DeliverySchema);
