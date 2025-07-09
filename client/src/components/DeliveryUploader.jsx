@@ -6,7 +6,7 @@ function DeliveryUploader() {
         time:'', 
         address:'', 
         lat: '', 
-        lng: '', 
+        lng: '',
         tip: '',
         total:'', 
         platform:'', 
