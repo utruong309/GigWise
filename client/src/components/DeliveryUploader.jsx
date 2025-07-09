@@ -52,158 +52,81 @@ export default function DeliveryUploader() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-12 p-6">
-      {/* Manual Form Section */}
-      <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-12">
-        <div className="flex items-center justify-center mb-12">
-          <span className="text-4xl mr-4">📋</span>
-          <h2 className="text-4xl font-bold text-gray-800">Manual Delivery Entry</h2>
+    <div className="container">
+      {/* Manual Entry Form */}
+      <div className="card">
+        <div className="title">
+          <span style={{ marginRight: '1rem' }}>📋</span>
+          Manual Delivery Input
         </div>
 
-        <form onSubmit={handleManualSubmit} className="space-y-0">
-          {/* Date + Time */}
-          <div className="flex flex-col lg:flex-row gap-8 mb-8">
+        <form onSubmit={handleManualSubmit}>
+          <div className="row">
             <div className="flex-1">
-              <label className="block text-lg font-semibold text-gray-700 mb-2">Date</label>
-              <input
-                type="date"
-                name="date"
-                value={form.date}
-                onChange={handleChange}
-                className="w-full px-5 py-3 border border-gray-300 rounded-lg text-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-500 transition"
-              />
+              <label className="label">Date</label>
+              <input type="date" name="date" value={form.date} onChange={handleChange} className="input" />
             </div>
-
             <div className="flex-1">
-              <label className="block text-lg font-semibold text-gray-700 mb-2">Time</label>
-              <input
-                type="time"
-                name="time"
-                value={form.time}
-                onChange={handleChange}
-                className="w-full px-5 py-3 border border-gray-300 rounded-lg text-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-500 transition"
-              />
+              <label className="label">Time</label>
+              <input type="time" name="time" value={form.time} onChange={handleChange} className="input" />
             </div>
           </div>
 
-          {/* Address */}
           <div className="mb-8">
-            <label className="block text-lg font-semibold text-gray-700 mb-2">Address</label>
-            <input
-              type="text"
-              name="address"
-              value={form.address}
-              onChange={handleChange}
-              placeholder="Enter address"
-              className="w-full px-5 py-3 border border-gray-300 rounded-lg text-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-500 transition"
-            />
+            <label className="label">Address</label>
+            <input type="text" name="address" value={form.address} onChange={handleChange} className="input" />
           </div>
 
-          {/* Lat + Lng */}
-          <div className="flex flex-col lg:flex-row gap-8 mb-8">
+          <div className="row">
             <div className="flex-1">
-              <label className="block text-lg font-semibold text-gray-700 mb-2">Latitude</label>
-              <input
-                type="text"
-                name="lat"
-                value={form.lat}
-                onChange={handleChange}
-                placeholder="Enter latitude"
-                className="w-full px-5 py-3 border border-gray-300 rounded-lg text-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-500 transition"
-              />
+              <label className="label">Latitude</label>
+              <input type="text" name="lat" value={form.lat} onChange={handleChange} className="input" />
             </div>
-
             <div className="flex-1">
-              <label className="block text-lg font-semibold text-gray-700 mb-2">Longitude</label>
-              <input
-                type="text"
-                name="lng"
-                value={form.lng}
-                onChange={handleChange}
-                placeholder="Enter longitude"
-                className="w-full px-5 py-3 border border-gray-300 rounded-lg text-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-500 transition"
-              />
+              <label className="label">Longitude</label>
+              <input type="text" name="lng" value={form.lng} onChange={handleChange} className="input" />
             </div>
           </div>
 
-          {/* Tip + Total */}
-          <div className="flex flex-col lg:flex-row gap-8 mb-8">
+          <div className="row">
             <div className="flex-1">
-              <label className="block text-lg font-semibold text-gray-700 mb-2">Tip</label>
-              <input
-                type="number"
-                name="tip"
-                value={form.tip}
-                onChange={handleChange}
-                placeholder="0.00"
-                step="0.01"
-                className="w-full px-5 py-3 border border-gray-300 rounded-lg text-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-500 transition"
-              />
+              <label className="label">Tip</label>
+              <input type="number" name="tip" value={form.tip} onChange={handleChange} className="input" />
             </div>
-
             <div className="flex-1">
-              <label className="block text-lg font-semibold text-gray-700 mb-2">Total</label>
-              <input
-                type="number"
-                name="total"
-                value={form.total}
-                onChange={handleChange}
-                placeholder="0.00"
-                step="0.01"
-                className="w-full px-5 py-3 border border-gray-300 rounded-lg text-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-500 transition"
-              />
+              <label className="label">Total</label>
+              <input type="number" name="total" value={form.total} onChange={handleChange} className="input" />
             </div>
           </div>
 
-          {/* Platform */}
           <div className="mb-8">
-            <label className="block text-lg font-semibold text-gray-700 mb-2">Platform</label>
-            <input
-              type="text"
-              name="platform"
-              value={form.platform}
-              onChange={handleChange}
-              placeholder="Uber Eats, DoorDash, etc."
-              className="w-full px-5 py-3 border border-gray-300 rounded-lg text-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-500 transition"
-            />
+            <label className="label">Platform</label>
+            <input type="text" name="platform" value={form.platform} onChange={handleChange} className="input" />
           </div>
 
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-5 px-8 rounded-xl hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-200 font-bold text-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
-          >
-            Submit
-          </button>
+          <button type="submit" className="button">Submit</button>
         </form>
       </div>
-  
+
       {/* CSV Upload Section */}
-      <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-12">
-        <div className="flex items-center justify-center mb-12">
-          <span className="text-4xl mr-4">📁</span>
-          <h2 className="text-4xl font-bold text-gray-800">Upload CSV File</h2>
+      <div className="card">
+        <div className="title">
+          <span style={{ marginRight: '1rem' }}>📁</span>
+          Upload CSV File
         </div>
-  
-        <div className="space-y-8">
-          <div className="border-3 border-dashed border-gray-300 rounded-2xl p-12 text-center hover:border-blue-400 transition-all bg-gray-50 hover:bg-blue-50">
-            <input
-              type="file"
-              accept=".csv"
-              onChange={handleCsvUpload}
-              className="block w-full text-xl text-gray-700 file:mr-6 file:py-4 file:px-8 file:rounded-xl file:border-0 file:text-xl file:font-bold file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-200 focus:outline-none cursor-pointer"
-            />
-          </div>
-  
-          <div className="text-center">
-            {csvFile ? (
-              <p className="text-2xl text-green-600 font-bold">Selected: {csvFile.name}</p>
-            ) : (
-              <p className="text-2xl text-gray-500 font-semibold">No file chosen</p>
-            )}
-          </div>
+
+        <div className="file-box">
+          <input type="file" accept=".csv" onChange={handleCsvUpload} />
+        </div>
+
+        <div className="file-info">
+          {csvFile ? (
+            <p className="file-selected">Selected: {csvFile.name}</p>
+          ) : (
+            <p className="file-empty">No file chosen</p>
+          )}
         </div>
       </div>
     </div>
-  );   
+  );
 }
