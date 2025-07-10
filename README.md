@@ -1,3 +1,1 @@
-# GigWise
-
-This web app helps drivers optimize earnings with data and maps.
+# GigWise - Google Maps Platform Awards 
