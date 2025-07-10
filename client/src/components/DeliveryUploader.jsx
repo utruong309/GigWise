@@ -60,66 +60,99 @@ export default function DeliveryUploader() {
           <span style={{ marginRight: '0.5rem' }}>📋</span>
           Manual Entry Form
         </div>
-
+  
         <form onSubmit={handleManualSubmit}>
           <div className="row">
             <div className="flex-1">
               <label className="label">Date</label>
-              <input type="date" name="date" value={form.date} onChange={handleChange} className="input" />
+              <input
+                type="date"
+                name="date"
+                value={form.date}
+                onChange={handleChange}
+                className="input"
+                placeholder="Select date"
+              />
             </div>
             <div className="flex-1">
               <label className="label">Time</label>
-              <input type="time" name="time" value={form.time} onChange={handleChange} className="input" />
+              <input
+                type="time"
+                name="time"
+                value={form.time}
+                onChange={handleChange}
+                className="input"
+                placeholder="Enter time"
+              />
             </div>
           </div>
-
+  
           <div className="mb-8">
             <label className="label">Address</label>
-            <input type="text" name="address" value={form.address} onChange={handleChange} className="input" />
+            <input
+              type="text"
+              name="address"
+              value={form.address}
+              onChange={handleChange}
+              className="input"
+              placeholder="Enter full address"
+            />
           </div>
-
-          <div className="row">
-            <div className="flex-1">
-              <label className="label">Latitude</label>
-              <input type="text" name="lat" value={form.lat} onChange={handleChange} className="input" />
-            </div>
-            <div className="flex-1">
-              <label className="label">Longitude</label>
-              <input type="text" name="lng" value={form.lng} onChange={handleChange} className="input" />
-            </div>
-          </div>
-
+  
           <div className="row">
             <div className="flex-1">
               <label className="label">Tip</label>
-              <input type="number" name="tip" value={form.tip} onChange={handleChange} className="input" />
+              <input
+                type="number"
+                name="tip"
+                value={form.tip}
+                onChange={handleChange}
+                className="input"
+                placeholder="e.g. 2.50"
+                step="0.01"
+              />
             </div>
             <div className="flex-1">
               <label className="label">Total</label>
-              <input type="number" name="total" value={form.total} onChange={handleChange} className="input" />
+              <input
+                type="number"
+                name="total"
+                value={form.total}
+                onChange={handleChange}
+                className="input"
+                placeholder="e.g. 15.00"
+                step="0.01"
+              />
             </div>
           </div>
-
+  
           <div className="mb-8">
             <label className="label">Platform</label>
-            <input type="text" name="platform" value={form.platform} onChange={handleChange} className="input" />
+            <input
+              type="text"
+              name="platform"
+              value={form.platform}
+              onChange={handleChange}
+              className="input"
+              placeholder="e.g. Uber Eats, DoorDash"
+            />
           </div>
-
+  
           <button type="submit" className="button">Submit</button>
         </form>
       </div>
-
+  
       {/* CSV Upload Section */}
       <div className="card">
         <div className="title">
           <span style={{ marginRight: '0.5rem' }}>📁</span>
           Upload CSV File
         </div>
-
+  
         <div className="file-box">
           <input type="file" accept=".csv" onChange={handleCsvUpload} />
         </div>
-
+  
         <div className="file-info">
           {csvFile ? (
             <p className="file-selected">Selected: {csvFile.name}</p>
@@ -129,5 +162,5 @@ export default function DeliveryUploader() {
         </div>
       </div>
     </div>
-  );
+  );  
 }
