@@ -6,8 +6,6 @@ export default function DeliveryUploader() {
     date: '',
     time: '',
     address: '',
-    lng: '',
-    lat: '',
     tip: '',
     total: '',
     platform: '',

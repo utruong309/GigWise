@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const DeliverySchema = new mongoose.Schema({
   userId: String,
-  date: String, //convert to Data object later 
+  date: String, //convert to Date object later 
   time: String,
   address: String,
   lat: Number,
