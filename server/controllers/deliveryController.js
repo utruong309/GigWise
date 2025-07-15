@@ -37,3 +37,52 @@ export const createDelivery = async (req, res) => {
     res.status(500).json({ error: 'Server error' }); 
   }
 };
+
+export const uploadCSV = (req, res) => {
+  if (!req.file)
+    return res.status(400).json({ error: 'No file uploaded' });
+
+  const deliveries = [];
+
+  fs.createReadStream(req.file.path)
+    .pipe(csv())
+    .on('data', row => deliveries.push(row))
+    .on('end', async () => {
+      fs.unlinkSync(req.file.path);                  // cleanup temp file
+      let success = 0, failed = 0;
+
+      for (const d of deliveries) {
+        try {
+          // Respect Google rate limits (~50 req/s free‑tier). Simple throttle:
+          await new Promise(r => setTimeout(r, 100));
+
+          const { data } = await axios.get(
+            'https://maps.googleapis.com/maps/api/geocode/json',
+            { params: { address: d.address, key: GOOGLE_API_KEY } }
+          );
+          const loc = data.results[0]?.geometry.location;
+          if (!loc) { failed++; continue; }
+
+          await Delivery.create({
+            platform: d.platform,
+            address: d.address,
+            tip: Number(d.tip),
+            date: new Date(d.date),
+            lat: loc.lat,
+            lng: loc.lng,
+          });
+          success++;
+        } catch (e) {
+          failed++;
+          console.error('Row failed:', d.address, e.message);
+        }
+      }
+
+      res.json({
+        message: 'CSV processed',
+        processed: deliveries.length,
+        saved: success,
+        failed,
+      });
+    });
+};
