@@ -72,7 +72,7 @@ export const uploadCSV = (req, res) => {
 
           await Delivery.create({
             userId,                   //same Firebase user for every row
-            date: r.date,
+            date: new Date(r.date),
             time: r.time,
             address: r.address,
             lat,

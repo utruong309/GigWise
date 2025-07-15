@@ -21,15 +21,18 @@ export default function DeliveryUploader() {
     e.preventDefault();
     const data = {
       ...form,
-      lat: parseFloat(form.lat),
-      lng: parseFloat(form.lng),
       tip: parseFloat(form.tip),
       total: parseFloat(form.total),
-      tags: form.tags.split(',').map(tag => tag.trim()),
     };
+
+    const token = await auth.currentUser.getIdToken(); 
+
     await fetch('http://localhost:3001/api/deliveries', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json', 
+        Authorization: `Bearer ${token}`
+      },
       body: JSON.stringify(data),
     });
     alert('Submitted!');
@@ -45,6 +48,9 @@ export default function DeliveryUploader() {
 
     await fetch('http://localhost:3001/api/deliveries/upload', {
       method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
       body: formData,
     });
     alert('File uploaded!');
