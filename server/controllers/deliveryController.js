@@ -1,24 +1,39 @@
 import fs from 'fs';
 import csv from 'csv-parser'; 
+import axios from 'axios'; 
+import Delivery from '../models/Delivery/js'; 
+import dotenv from 'dotenv'; 
 
-export const createDelivery = (req, res) => {
-  const data = req.body;
-  console.log('Manual entry form submitted:', data);
-  res.status(201).json({ message: 'Delivery saved' });
-};
+dotenv.config(); 
+const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY; 
 
-export const uploadCSV = (req, res) => {
-  if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
+export const createDelivery = async (req, res) => {
+  const { date, time, address, tip, total, platform } = req.body; 
 
-  const results = [];
-  fs.createReadStream(req.file.path)
-    .pipe(csv())
-    .on('data', (row) => {
-      results.push(row); //push each parsed row into results array
-    })
-    .on('end', () => {
-      console.log('CSV parsed:', results.length, 'records');
-      fs.unlinkSync(req.file.path); //delete the file after reading
-      res.json({ message: 'CSV uploaded', records: results.length });
-    });
+  if (!address) return res.status(400).json({ error: 'Address required'}); 
+
+  try {
+    const { data } = await axios.get(
+      'https://maps.googleapis.com/maps/api/geocode/json',
+      { params: { address, key: GOOGLE_API_KEY } }
+    );
+
+    const location = data.results[0]?.geometry.location;
+    if (!location) return res.status(400).json({ error: 'Bad address' });
+
+    const saved = await Delivery.create({
+      date: new Date(date), 
+      time, 
+      lat: location.lat, 
+      lng: location.lng, 
+      tip: Number(tip),  
+      total: Number(total),
+      platform
+    }); 
+
+    res.status(201).json({ message: 'Delivery saved', delivery: saved });
+  } catch (err) {
+    console.error(err); 
+    res.status(500).json({ error: 'Server error' }); 
+  }
 };
