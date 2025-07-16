@@ -46,7 +46,7 @@ export const createDelivery = async (req, res) => {
     console.error(err);
     res.status(500).json({ error: err.message || 'Server error' });
   }
-};
+}; 
 
 export const uploadCSV = (req, res) => {
   if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
