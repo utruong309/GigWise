@@ -40,3 +40,75 @@
 .read-the-docs {
   color: #888;
 }
+
+.container {
+  margin-top: 2rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.row {
+  display: flex;
+  gap: 1rem;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
+.button {
+  background-color: #4f46e5;
+  color: white;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #4338ca;
+}
+
+.file-box input[type="file"] {
+  border: 1px dashed #ccc;
+  padding: 1rem;
+  width: 100%;
+  cursor: pointer;
+}
+
+.file-info {
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+.file-selected {
+  color: green;
+}
+
+.file-empty {
+  color: gray;
+}
