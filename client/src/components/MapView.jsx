@@ -16,6 +16,8 @@ const center = {
   lng: -122.0841,
 };
 
+const libraries = ['visualization'];
+
 const MapView = ({ deliveries }) => {
   const [mode, setMode] = useState('marker');
 
@@ -33,10 +35,8 @@ const MapView = ({ deliveries }) => {
         Switch to {mode === 'marker' ? 'Heatmap' : 'Marker'} View
       </button>
 
-      <LoadScript
-        googleMapsApiKey={import.meta.env.VITE_GOOGLE_API_KEY}
-        libraries={['visualization']}
-      >
+      <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_API_KEY} libraries={libraries}>
+
         <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={12}>
           {mode === 'marker'
             ? deliveries.map((d, i) => (

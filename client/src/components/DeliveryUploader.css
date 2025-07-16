@@ -45,16 +45,13 @@
   outline: none;
 }
 
-/* Layout for rows */
-.form-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 1rem;
+.row > div,
+.form-row > div {
+  flex: 1 1 200px; /* allows wrapping on small screens */
 }
 
-.form-row > div {
-  flex: 1;
+.row > div:first-child .input {
+  margin-right: 0.25rem; /* small gap between two inputs */
 }
 
 /* Single input group spacing */
@@ -112,4 +109,4 @@
 
 .file-empty {
   color: #6b7280; /* gray-500 */
-} 
+}
