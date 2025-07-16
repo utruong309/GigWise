@@ -34,7 +34,7 @@ const MapView = ({ deliveries }) => {
       </button>
 
       <LoadScript
-        googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY}
+        googleMapsApiKey={import.meta.env.VITE_GOOGLE_API_KEY}
         libraries={['visualization']}
       >
         <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={12}>
