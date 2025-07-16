@@ -19,6 +19,15 @@ async function geocode(address) {
   return loc; 
 }
 
+export const getAllDeliveries = async (req, res) => {
+  try {
+    const deliveries = await Delivery.find({ userId: req.user.uid }); 
+    res.json(deliveries);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 export const createDelivery = async (req, res) => {
   const { date, time, address, tip, total, platform } = req.body;
   const userId = req.user?.uid;                          
