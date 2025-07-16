@@ -8,6 +8,7 @@ dotenv.config();
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 
 async function geocode(address) {
+  console.log('Geocoding address:', address);
   const { data } = await axios.get(
     'https://maps.googleapis.com/maps/api/geocode/json',
     { params: { address, key: GOOGLE_API_KEY } }

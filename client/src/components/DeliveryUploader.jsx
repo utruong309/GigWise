@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './DeliveryUploader.css';
+import { getAuth } from 'firebase/auth';
 
 export default function DeliveryUploader() {
   const [form, setForm] = useState({
@@ -25,7 +26,14 @@ export default function DeliveryUploader() {
       total: parseFloat(form.total),
     };
 
-    const token = await auth.currentUser.getIdToken(); 
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (!user) {
+      alert('Please sign in first.');
+      return;
+    }
+    
+    const token = await user.getIdToken();
 
     await fetch('http://localhost:3001/api/deliveries', {
       method: 'POST',
@@ -39,6 +47,16 @@ export default function DeliveryUploader() {
   };
 
   const handleCsvUpload = async (e) => {
+
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (!user) {
+      alert("Please log in first");
+      return;
+    }
+    
+    const token = await user.getIdToken();
+    
     const file = e.target.files[0];
     if (!file) return;
     setCsvFile(file);

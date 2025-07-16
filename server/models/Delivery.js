@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from 'mongoose'; 
 
 const DeliverySchema = new mongoose.Schema({
   userId: String,
@@ -12,4 +12,6 @@ const DeliverySchema = new mongoose.Schema({
   platform: String, 
 });
 
-module.exports = mongoose.model("Delivery", DeliverySchema);
+const Delivery = mongoose.model('Delivery', DeliverySchema);
+
+export default Delivery;
