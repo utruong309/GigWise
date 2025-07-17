@@ -19,6 +19,7 @@ function App() {
         });
         const data = await res.json();
         setDeliveries(data);
+        console.log(data);
       } catch (err) {
         console.error("Failed to fetch deliveries:", err);
       }

@@ -6,13 +6,13 @@ import {
   HeatmapLayer,
 } from '@react-google-maps/api';
 
-const containerStyle = { //map size
+const containerStyle = {
   width: '100%',
   height: '500px',
 };
 
 const center = {
-  lat: 37.4221, //default center Google HQ
+  lat: 37.4221, 
   lng: -122.0841,
 };
 
@@ -21,7 +21,11 @@ const libraries = ['visualization'];
 const MapView = ({ deliveries }) => {
   const [mode, setMode] = useState('marker');
 
-  const heatmapData = deliveries.map((d) => ({
+  const validDeliveries = Array.isArray(deliveries)
+    ? deliveries.filter((d) => d.lat && d.lng)
+    : [];
+
+  const heatmapData = validDeliveries.map((d) => ({
     location: new window.google.maps.LatLng(d.lat, d.lng),
     weight: d.tip,
   }));
@@ -29,25 +33,34 @@ const MapView = ({ deliveries }) => {
   return (
     <div>
       <button
-        onClick={() => setMode((prev) => (prev === 'marker' ? 'heatmap' : 'marker'))}
+        onClick={() =>
+          setMode((prev) => (prev === 'marker' ? 'heatmap' : 'marker'))
+        }
         style={{ marginBottom: '1rem' }}
       >
         Switch to {mode === 'marker' ? 'Heatmap' : 'Marker'} View
       </button>
 
-      <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_API_KEY} libraries={libraries}>
-
-        <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={12}>
-          {mode === 'marker'
-            ? deliveries.map((d, i) => (
-                <Marker
-                  key={i}
-                  position={{ lat: d.lat, lng: d.lng }}
-                  icon="https://maps.google.com/mapfiles/ms/icons/green-dot.png"
-                  title={`Tip: $${d.tip} | Platform: ${d.platform}`}
-                />
-              ))
-            : <HeatmapLayer data={heatmapData} />}
+      <LoadScript
+        googleMapsApiKey={import.meta.env.VITE_GOOGLE_API_KEY}
+        libraries={libraries}
+      >
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={center}
+          zoom={12}
+        >
+          {mode === 'marker' ? (
+            validDeliveries.map((d, i) => (
+              <Marker
+                key={i}
+                position={{ lat: d.lat, lng: d.lng }}
+                title={`Tip: $${d.tip} | Platform: ${d.platform}`}
+              />
+            ))
+          ) : (
+            <HeatmapLayer data={heatmapData} />
+          )}
         </GoogleMap>
       </LoadScript>
     </div>
