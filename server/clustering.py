@@ -3,8 +3,12 @@ from sklearn.cluster import DBSCAN
 import json
 from shapely.geometry import MultiPoint
 from pymongo import MongoClient
+import os
+from dotenv import load_dotenv
 
-MONGO_URI = 'mongodb+srv://uyenthutruong09:HMf8gMHD20PwWqn0@cluster0.docbatu.mongodb.net/gigwise?retryWrites=true&w=majority&appName=Cluster0'
+load_dotenv()
+
+MONGO_URI = os.getenv('MONGO_URI')
 DB_NAME = 'gigwise'
 COLLECTION_NAME = 'deliveries'
 
