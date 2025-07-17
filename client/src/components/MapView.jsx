@@ -43,6 +43,7 @@ const MapView = ({ deliveries }) => {
                 <Marker
                   key={i}
                   position={{ lat: d.lat, lng: d.lng }}
+                  icon="https://maps.google.com/mapfiles/ms/icons/green-dot.png"
                   title={`Tip: $${d.tip} | Platform: ${d.platform}`}
                 />
               ))
