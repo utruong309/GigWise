@@ -8,24 +8,43 @@ import MapClusters from './components/MapClusters.jsx';
 function App() {
   const { user, login, logout } = useAuth();
   const [deliveries, setDeliveries] = useState([]);
+  const [viewMode, setViewMode] = useState("marker"); // 'marker' or 'cluster'
+  const [loadingClusters, setLoadingClusters] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const fetchDeliveries = async () => {
+    try {
+      const token = await user.getIdToken();
+      const res = await fetch('http://localhost:3001/api/deliveries/all', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+      setDeliveries(data);
+    } catch (err) {
+      console.error("Failed to fetch deliveries:", err);
+    }
+  };
+
+  const runClustering = async () => {
+    try {
+      setLoadingClusters(true);
+      setSuccessMessage("");
+      const token = await user.getIdToken();
+      const res = await fetch('http://localhost:3001/api/cluster/run', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+      setSuccessMessage(data.message || "Clusters updated!");
+    } catch (err) {
+      console.error("Clustering failed:", err);
+      setSuccessMessage("Failed to update clusters.");
+    } finally {
+      setLoadingClusters(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchDeliveries = async () => {
-      try {
-        const token = await user.getIdToken();
-        const res = await fetch('http://localhost:3001/api/deliveries/all', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const data = await res.json();
-        setDeliveries(data);
-        console.log(data);
-      } catch (err) {
-        console.error("Failed to fetch deliveries:", err);
-      }
-    };
-
     if (user) fetchDeliveries();
   }, [user]);
 
@@ -42,11 +61,37 @@ function App() {
           </button>
 
           <hr className="my-8" />
-          <DeliveryUploader />
+          <DeliveryUploader onUploadComplete={fetchDeliveries} />
 
           <hr className="my-8" />
-          <MapView deliveries={deliveries} /> 
-          <MapClusters />
+          <div className="mb-4">
+            <button
+              onClick={() =>
+                setViewMode((prev) => (prev === "marker" ? "cluster" : "marker"))
+              }
+              className="bg-blue-600 text-white px-4 py-2 rounded mr-2"
+            >
+              Toggle to {viewMode === "marker" ? "Cluster View" : "Map View"}
+            </button>
+
+            <button
+              onClick={runClustering}
+              className="bg-green-600 text-white px-4 py-2 rounded"
+              disabled={loadingClusters}
+            >
+              {loadingClusters ? "Clustering..." : "Run Clustering"}
+            </button>
+
+            {successMessage && (
+              <p className="mt-2 text-green-600 font-medium">{successMessage}</p>
+            )}
+          </div>
+
+          {viewMode === "marker" ? (
+            <MapView deliveries={deliveries} />
+          ) : (
+            <MapClusters />
+          )}
         </>
       ) : (
         <>
