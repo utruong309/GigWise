@@ -3,7 +3,7 @@ import {
     createDelivery, 
     uploadCSV
 } from '../controllers/deliveryController.js'; 
-import upload from '../middleware/upload.js'; 
+import upload from '../uploads/upload.js'; 
 import { verifyFirebaseToken } from '../middleware/authMiddleware.js';
 import { getAllDeliveries } from '../controllers/deliveryController.js';
 
