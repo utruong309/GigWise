@@ -3,6 +3,7 @@ import csv from 'csv-parser';
 import axios from 'axios';
 import Delivery from '../models/Delivery.js';     
 import dotenv from 'dotenv';
+import { runClustering } from '../scripts/runClustering.js';
 
 dotenv.config();
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
@@ -49,6 +50,8 @@ export const createDelivery = async (req, res) => {
       total: Number(total) || 0,
       platform,
     });
+
+    await runClustering();
 
     res.status(201).json({ message: 'Delivery saved', delivery });
   } catch (err) {
@@ -99,6 +102,8 @@ export const uploadCSV = (req, res) => {
           continue;
         }
       }
+
+      await runClustering();
 
       res.json({
         message: 'CSV processed',
