@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors'; 
 import deliveriesRouter from './routes/deliveries.js'; 
 import mongoose from 'mongoose'; 
+import clusterRouter from './routes/clusters.js';
 
 dotenv.config(); 
 
@@ -28,3 +29,5 @@ mongoose
     console.error('MongoDB connection error:', err);
     process.exit(1); //exit if DB fails
   });
+
+app.use('/api/clusters', clusterRouter);
