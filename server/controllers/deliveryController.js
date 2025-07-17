@@ -96,6 +96,7 @@ export const uploadCSV = (req, res) => {
         } catch (e) {
           failed++;
           console.error(`Failed (${r.address}):`, e.message);
+          continue;
         }
       }
 
