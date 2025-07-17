@@ -3,6 +3,7 @@ import { useAuth } from "./firebase/context.jsx";
 import './App.css';
 import DeliveryUploader from "./components/DeliveryUploader";
 import MapView from "./components/MapView"; 
+import MapClusters from './components/MapClusters.jsx';
 
 function App() {
   const { user, login, logout } = useAuth();
@@ -45,6 +46,7 @@ function App() {
 
           <hr className="my-8" />
           <MapView deliveries={deliveries} /> 
+          <MapClusters />
         </>
       ) : (
         <>
