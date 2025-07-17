@@ -19,7 +19,7 @@ export default function MapClusters() {
   useEffect(() => {
     const fetchClusters = async () => {
       try {
-        const res = await fetch("http://localhost:3001/api/cluster"); 
+        const res = await fetch("http://localhost:3001/api/clusters"); 
         const data = await res.json();
         if (Array.isArray(data)) {
           setClusters(data);
