@@ -5,7 +5,7 @@ import path from 'path';
 
 const router = express.Router();
 
-// POST /api/cluster/run
+// POST /api/clusters/run
 router.post('/run', (req, res) => {
   const scriptPath = path.join(process.cwd(), 'clustering.py');
 

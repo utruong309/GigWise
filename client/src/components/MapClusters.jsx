@@ -10,7 +10,7 @@ const containerStyle = {
   height: '500px',
 };
 
-const center = { lat: 37.4221, lng: -122.0841 };
+const center = { lat: 37.7764, lng: -122.4160 };
 
 export default function MapClusters() {
   const [clusters, setClusters] = useState([]);
@@ -35,16 +35,16 @@ export default function MapClusters() {
   }, []);
 
   return (
-    <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10}>
+    <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={15}>
       {clusters.map((cluster, i) => (
         <Polygon
           key={i}
           paths={cluster.polygon.map(([lat, lng]) => ({ lat, lng }))}
           options={{
-            fillColor: '#2196f3',
-            fillOpacity: 0.35,
-            strokeColor: '#1e88e5',
-            strokeOpacity: 0.8,
+            fillColor: '#ff0000',
+            fillOpacity: 0.6,
+            strokeColor: '#000000',
+            strokeOpacity: 1,
             strokeWeight: 2,
             clickable: true,
           }}

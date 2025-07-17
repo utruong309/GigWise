@@ -33,7 +33,7 @@ function App() {
       setLoadingClusters(true);
       setSuccessMessage("");
       const token = await user.getIdToken();
-      const res = await fetch("http://localhost:3001/api/cluster/run", {
+      const res = await fetch("http://localhost:3001/api/clusters/run", {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
       });
