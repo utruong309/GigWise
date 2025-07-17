@@ -1,17 +1,18 @@
 import os
 import json
 from pymongo import MongoClient
-from shapely.geometry import MultiPoint
+from shapely.geometry import MultiPoint, Polygon
 from sklearn.cluster import DBSCAN
 import numpy as np
 from datetime import datetime
 from dotenv import load_dotenv
+import certifi
 
 load_dotenv()
 MONGO_URI = os.getenv("MONGO_URI")
+client = MongoClient(MONGO_URI, tlsCAFile=certifi.where()) 
 
 def fetch_data():
-    client = MongoClient(MONGO_URI)
     db = client["gigwise"]
     collection = db["deliveries"]
     data = list(collection.find({}, {"lat": 1, "lng": 1, "time": 1, "tip": 1, "total": 1}))
@@ -32,7 +33,8 @@ def run_clustering(data, coords, eps=0.02, min_samples=3):
     db = DBSCAN(eps=eps, min_samples=min_samples).fit(coords)
     result = []
     for label in set(db.labels_):
-        if label == -1: continue
+        if label == -1:
+            continue
         cluster_points = [d for d, l in zip(data, db.labels_) if l == label]
         lats = [p["lat"] for p in cluster_points]
         lngs = [p["lng"] for p in cluster_points]
@@ -45,15 +47,22 @@ def run_clustering(data, coords, eps=0.02, min_samples=3):
             except:
                 hours.append(0)
         points = list(zip(lats, lngs))
-        polygon = MultiPoint(points).convex_hull.exterior.coords[:]
+
+        hull = MultiPoint(points).convex_hull
+        if isinstance(hull, Polygon):
+            polygon_coords = list(hull.exterior.coords)
+        else:
+            polygon_coords = points  
+
         result.append({
             "cluster": int(label),
             "center": [np.mean(lats), np.mean(lngs)],
-            "polygon": polygon,
+            "polygon": polygon_coords,
             "total_earnings": sum(totals),
             "avg_tip": np.mean(tips),
             "active_hour": max(set(hours), key=hours.count)
         })
+
     with open("cluster_output.json", "w") as f:
         json.dump(result, f)
 

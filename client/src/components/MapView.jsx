@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   GoogleMap,
-  LoadScript,
   Marker,
   HeatmapLayer,
 } from '@react-google-maps/api';
@@ -15,8 +14,6 @@ const center = {
   lat: 37.4221, 
   lng: -122.0841,
 };
-
-const libraries = ['visualization'];
 
 const MapView = ({ deliveries }) => {
   const [mode, setMode] = useState('marker');
@@ -41,28 +38,23 @@ const MapView = ({ deliveries }) => {
         Switch to {mode === 'marker' ? 'Heatmap' : 'Marker'} View
       </button>
 
-      <LoadScript
-        googleMapsApiKey={import.meta.env.VITE_GOOGLE_API_KEY}
-        libraries={libraries}
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={12}
       >
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={center}
-          zoom={12}
-        >
-          {mode === 'marker' ? (
-            validDeliveries.map((d, i) => (
-              <Marker
-                key={i}
-                position={{ lat: d.lat, lng: d.lng }}
-                title={`Tip: $${d.tip} | Platform: ${d.platform}`}
-              />
-            ))
-          ) : (
-            <HeatmapLayer data={heatmapData} />
-          )}
-        </GoogleMap>
-      </LoadScript>
+        {mode === 'marker' ? (
+          validDeliveries.map((d, i) => (
+            <Marker
+              key={i}
+              position={{ lat: d.lat, lng: d.lng }}
+              title={`Tip: $${d.tip} | Platform: ${d.platform}`}
+            />
+          ))
+        ) : (
+          <HeatmapLayer data={heatmapData} />
+        )}
+      </GoogleMap>
     </div>
   );
 };

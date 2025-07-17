@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './DeliveryUploader.css';
 import { getAuth } from 'firebase/auth';
 
-export default function DeliveryUploader() {
+export default function DeliveryUploader({ onUploadComplete }) {
   const [form, setForm] = useState({
     date: '',
     time: '',
@@ -35,7 +35,7 @@ export default function DeliveryUploader() {
 
     const token = await user.getIdToken();
 
-    await fetch('http://localhost:3001/api/deliveries', {
+    const res = await fetch('http://localhost:3001/api/deliveries', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -44,7 +44,12 @@ export default function DeliveryUploader() {
       body: JSON.stringify(data),
     });
 
-    alert('Submitted!');
+    if (res.ok) {
+      alert('Submitted!');
+      onUploadComplete?.(); 
+    } else {
+      alert('Submission failed.');
+    }
   };
 
   const handleCsvUpload = async (e) => {
@@ -64,7 +69,7 @@ export default function DeliveryUploader() {
     const formData = new FormData();
     formData.append('csv', file);
 
-    await fetch('http://localhost:3001/api/deliveries/upload', {
+    const res = await fetch('http://localhost:3001/api/deliveries/upload', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -72,7 +77,12 @@ export default function DeliveryUploader() {
       body: formData,
     });
 
-    alert('File uploaded!');
+    if (res.ok) {
+      alert('File uploaded!');
+      onUploadComplete?.(); 
+    } else {
+      alert('Upload failed.');
+    }
   };
 
   return (

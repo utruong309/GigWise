@@ -2,20 +2,23 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "./firebase/context.jsx";
 import './App.css';
 import DeliveryUploader from "./components/DeliveryUploader";
-import MapView from "./components/MapView"; 
-import MapClusters from './components/MapClusters.jsx';
+import MapView from "./components/MapView";
+import MapClusters from "./components/MapClusters.jsx";
+import { LoadScript } from "@react-google-maps/api";
+
+const libraries = ['visualization'];
 
 function App() {
   const { user, login, logout } = useAuth();
   const [deliveries, setDeliveries] = useState([]);
-  const [viewMode, setViewMode] = useState("marker"); // 'marker' or 'cluster'
+  const [viewMode, setViewMode] = useState("marker");
   const [loadingClusters, setLoadingClusters] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
   const fetchDeliveries = async () => {
     try {
       const token = await user.getIdToken();
-      const res = await fetch('http://localhost:3001/api/deliveries/all', {
+      const res = await fetch("http://localhost:3001/api/deliveries/all", {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -30,8 +33,8 @@ function App() {
       setLoadingClusters(true);
       setSuccessMessage("");
       const token = await user.getIdToken();
-      const res = await fetch('http://localhost:3001/api/cluster/run', {
-        method: 'POST',
+      const res = await fetch("http://localhost:3001/api/cluster/run", {
+        method: "POST",
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -67,7 +70,9 @@ function App() {
           <div className="mb-4">
             <button
               onClick={() =>
-                setViewMode((prev) => (prev === "marker" ? "cluster" : "marker"))
+                setViewMode((prev) =>
+                  prev === "marker" ? "cluster" : "marker"
+                )
               }
               className="bg-blue-600 text-white px-4 py-2 rounded mr-2"
             >
@@ -83,15 +88,22 @@ function App() {
             </button>
 
             {successMessage && (
-              <p className="mt-2 text-green-600 font-medium">{successMessage}</p>
+              <p className="mt-2 text-green-600 font-medium">
+                {successMessage}
+              </p>
             )}
           </div>
 
-          {viewMode === "marker" ? (
-            <MapView deliveries={deliveries} />
-          ) : (
-            <MapClusters />
-          )}
+          <LoadScript
+            googleMapsApiKey={import.meta.env.VITE_GOOGLE_API_KEY}
+            libraries={libraries}
+          >
+            {viewMode === "marker" ? (
+              <MapView deliveries={deliveries} />
+            ) : (
+              <MapClusters />
+            )}
+          </LoadScript>
         </>
       ) : (
         <>

@@ -17,6 +17,8 @@ app.use(express.json()); //parses JSON request bodies
 //base URL
 app.use('/api/deliveries', deliveriesRouter); 
 
+app.use('/api/clusters', clusterRouter);
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
@@ -29,5 +31,3 @@ mongoose
     console.error('MongoDB connection error:', err);
     process.exit(1); //exit if DB fails
   });
-
-app.use('/api/clusters', clusterRouter);
