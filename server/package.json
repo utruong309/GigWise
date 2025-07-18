@@ -6,13 +6,17 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@pinecone-database/pinecone": "^6.1.1",
     "axios": "^1.10.0",
     "cors": "^2.8.5",
     "csv-parser": "^3.2.0",
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
     "firebase-admin": "^13.4.0",
-    "mongoose": "^8.16.3",
-    "multer": "^2.0.1"
+    "langchain": "^0.3.30",
+    "mongoose": "^8.16.4",
+    "multer": "^2.0.1",
+    "openai": "^5.10.1",
+    "pinecone-client": "^2.0.0"
   }
 }

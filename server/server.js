@@ -16,7 +16,6 @@ app.use(express.json()); //parses JSON request bodies
 
 //base URL
 app.use('/api/deliveries', deliveriesRouter); 
-
 app.use('/api/clusters', clusterRouter);
 
 mongoose

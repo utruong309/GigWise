@@ -5,6 +5,7 @@ import DeliveryUploader from "./components/DeliveryUploader";
 import MapView from "./components/MapView";
 import MapClusters from "./components/MapClusters.jsx";
 import { LoadScript } from "@react-google-maps/api";
+import AIChatBox from './components/AIChatBox';
 
 const libraries = ['visualization'];
 
@@ -104,6 +105,9 @@ function App() {
               <MapClusters />
             )}
           </LoadScript>
+
+          <hr className="my-8" />
+          <AIChatBox /> 
         </>
       ) : (
         <>
