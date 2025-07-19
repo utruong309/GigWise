@@ -110,8 +110,6 @@ function App() {
           <hr className="my-8" />
           <AIDeliveryAssistant /> 
 
-          <hr className="my-8" />
-          <DeliveryRecommendations />
         </>
       ) : (
         <>
