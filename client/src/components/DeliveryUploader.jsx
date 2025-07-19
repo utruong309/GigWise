@@ -88,7 +88,7 @@ export default function DeliveryUploader({ onUploadComplete }) {
   return (
     <div className="modern-glass-card modern-uploader">
       <div className="modern-card-title">
-        <span role="img" aria-label="clipboard">📋</span> Manual Entry Form
+        <span role="img" aria-label="clipboard">📋</span> Logging Form
       </div>
       <form onSubmit={handleManualSubmit} className="modern-form">
         <div className="modern-form-group">
