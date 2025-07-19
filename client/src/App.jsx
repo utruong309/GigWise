@@ -5,6 +5,7 @@ import DeliveryUploader from "./components/DeliveryUploader";
 import MapView from "./components/MapView";
 import MapClusters from "./components/MapClusters.jsx";
 import { LoadScript } from "@react-google-maps/api";
+import AIDeliveryAssistant from "./components/AIDeliveryAssistant.jsx";
 
 const libraries = ['visualization'];
 
@@ -103,6 +104,7 @@ function App() {
             ) : (
               <MapClusters />
             )}
+            <AIDeliveryAssistant />
           </LoadScript>
 
         </>
