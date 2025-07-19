@@ -4,8 +4,6 @@ import cors from 'cors';
 import deliveriesRouter from './routes/deliveries.js'; 
 import mongoose from 'mongoose'; 
 import clusterRouter from './routes/clusters.js';
-import aiRouter from './routes/ai.js'
-import recommendationsRouter from './routes/recommendations.js'
 
 dotenv.config(); 
 
@@ -19,8 +17,6 @@ app.use(express.json()); //parses JSON request bodies
 //base URL
 app.use('/api/deliveries', deliveriesRouter); 
 app.use('/api/clusters', clusterRouter);
-app.use('/api/ai', aiRouter);
-app.use('/api/recommendations', recommendationsRouter); 
 
 mongoose
   .connect(process.env.MONGO_URI)
