@@ -20,7 +20,7 @@ router.post('/run', (req, res) => {
   });
 });
 
-// GET /api/cluster
+// GET /api/clusters
 router.get('/', (req, res) => {
   const filePath = path.join(process.cwd(), 'cluster_output.json');
 

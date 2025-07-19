@@ -1,50 +1,44 @@
 import { Router } from 'express';
-import { OpenAI } from 'langchain/llms/openai';
-import { PineconeStore } from 'langchain/vectorstores/pinecone';
-import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
-import { PineconeClient } from 'pinecone-client';
-import { RunnableSequence } from 'langchain/schema/runnable';
+import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { createStuffDocumentsChain } from 'langchain/chains/combine_documents';
+import { ChatPromptTemplate } from "@langchain/core/prompts";
+import Delivery from '../models/Delivery.js';
 
 const router = Router();
 
 router.post('/ask-ai', async (req, res) => {
   try {
-    const { question } = req.body;
+    const { question, userId } = req.body;
+    const deliveries = await Delivery.find({ userId });
+    const docs = deliveries.map(d => ({
+      pageContent: `Delivery to ${d.address} at ${d.time}. Tip: $${d.tip}.`,
+      metadata: { id: d._id.toString() }
+    }));
 
-    // 1. Set up LLM and retriever
-    const llm = new OpenAI({ openAIApiKey: process.env.OPENAI_API_KEY });
-    const pinecone = new PineconeClient();
-    await pinecone.init({ apiKey: process.env.PINECONE_API_KEY, environment: process.env.PINECONE_ENV });
-    const index = pinecone.Index('deliveries');
-    const vectorStore = await PineconeStore.fromExistingIndex(
-      new OpenAIEmbeddings({ openAIApiKey: process.env.OPENAI_API_KEY }),
-      { pineconeIndex: index }
-    );
-    const retriever = vectorStore.asRetriever();
-
-    // 2. Create a chain that stuffs retrieved docs into the LLM prompt
-    const combineDocsChain = await createStuffDocumentsChain({
-      llm,
-      prompt: undefined, // Use default prompt, or customize if you want
+    const llm = new ChatGoogleGenerativeAI({
+      apiKey: process.env.GEMINI_API_KEY,
+      model: "gemini-1.5-pro-latest",
     });
 
-    // 3. Compose the retrieval and QA steps
-    const chain = RunnableSequence.from([
-      async (input) => ({
-        question: input.question,
-        context: await retriever.getRelevantDocuments(input.question),
-      }),
-      async ({ question, context }) => {
-        // context is an array of documents; combineDocsChain expects { question, context }
-        return combineDocsChain.invoke({ question, context });
-      },
+    //use a chat prompt template
+    const prompt = ChatPromptTemplate.fromMessages([
+      ["system", "You are a helpful delivery assistant. Use the provided delivery history to answer the user's question."],
+      ["human", "{question}\n\nDelivery history:\n{context}"]
     ]);
 
-    // 4. Run the chain
-    const response = await chain.invoke({ question });
+    const combineDocsChain = await createStuffDocumentsChain({
+      llm,
+      prompt,
+    });
+
+    const response = await combineDocsChain.invoke({
+      question,
+      context: docs,
+    });
+
     res.json({ answer: response.text });
   } catch (err) {
+    console.error('AI endpoint error:', err);
     res.status(500).json({ error: err.message });
   }
 });

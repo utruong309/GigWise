@@ -5,7 +5,8 @@ import DeliveryUploader from "./components/DeliveryUploader";
 import MapView from "./components/MapView";
 import MapClusters from "./components/MapClusters.jsx";
 import { LoadScript } from "@react-google-maps/api";
-import AIChatBox from './components/AIChatBox';
+import AIDeliveryAssistant from './components/AIDeliveryAssistant.jsx'; 
+import DeliveryRecommendations from './components/DeliveryRecommendations.jsx';
 
 const libraries = ['visualization'];
 
@@ -107,7 +108,10 @@ function App() {
           </LoadScript>
 
           <hr className="my-8" />
-          <AIChatBox /> 
+          <AIDeliveryAssistant /> 
+
+          <hr className="my-8" />
+          <DeliveryRecommendations />
         </>
       ) : (
         <>
