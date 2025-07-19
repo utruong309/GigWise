@@ -4,10 +4,14 @@ import {
   Polygon,
   InfoWindow,
 } from '@react-google-maps/api';
+import '../ModernUI.css';
 
 const containerStyle = {
   width: '100%',
   height: '500px',
+  borderRadius: '1.5rem',
+  boxShadow: '0 8px 32px rgba(31, 38, 135, 0.2)',
+  overflow: 'hidden',
 };
 
 const center = { lat: 37.7764, lng: -122.4160 };
@@ -41,14 +45,16 @@ export default function MapClusters() {
           key={i}
           paths={cluster.polygon.map(([lat, lng]) => ({ lat, lng }))}
           options={{
-            fillColor: '#ff0000',
+            fillColor: selected && selected.cluster === cluster.cluster ? '#a78bfa' : '#ff0000',
             fillOpacity: 0.6,
-            strokeColor: '#000000',
+            strokeColor: selected && selected.cluster === cluster.cluster ? '#6366f1' : '#000000',
             strokeOpacity: 1,
             strokeWeight: 2,
             clickable: true,
+            zIndex: selected && selected.cluster === cluster.cluster ? 2 : 1,
           }}
           onClick={() => setSelected(cluster)}
+          className={selected && selected.cluster === cluster.cluster ? 'modern-glow' : ''}
         />
       ))}
 
@@ -57,11 +63,11 @@ export default function MapClusters() {
           position={{ lat: selected.center[0], lng: selected.center[1] }}
           onCloseClick={() => setSelected(null)}
         >
-          <div>
+          <div className="modern-glass-infowindow">
             <p><strong>Cluster #{selected.cluster}</strong></p>
-            <p>Total Earnings: ${selected.total_earnings.toFixed(2)}</p>
-            <p>Average Tip: ${selected.avg_tip.toFixed(2)}</p>
-            <p>Most Active Hour: {selected.active_hour}:00</p>
+            <p>💰 Total Earnings: <b>${selected.total_earnings.toFixed(2)}</b></p>
+            <p>💸 Average Tip: <b>${selected.avg_tip.toFixed(2)}</b></p>
+            <p>⏰ Most Active Hour: <b>{selected.active_hour}:00</b></p>
           </div>
         </InfoWindow>
       )}

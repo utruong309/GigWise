@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "./firebase/context.jsx";
-import './App.css';
-import DeliveryUploader from "./components/DeliveryUploader";
-import MapView from "./components/MapView";
+import './ModernUI.css';
+import DeliveryUploader from "./components/DeliveryUploader.jsx";
+import MapView from "./components/MapView.jsx";
 import MapClusters from "./components/MapClusters.jsx";
 import { LoadScript } from "@react-google-maps/api";
 import AIDeliveryAssistant from "./components/AIDeliveryAssistant.jsx";
+import logo from "./assets/logo.png";
 
 const libraries = ['visualization'];
 
@@ -53,72 +54,65 @@ function App() {
   }, [user]);
 
   return (
-    <div className="text-center p-8 font-sans">
-      {user ? (
-        <>
-          <h2 className="text-2xl font-bold">Welcome, {user.displayName}</h2>
-          <button
-            onClick={logout}
-            className="bg-red-500 text-white px-4 py-2 rounded"
-          >
-            Logout
-          </button>
-
-          <hr className="my-8" />
-          <DeliveryUploader onUploadComplete={fetchDeliveries} />
-
-          <hr className="my-8" />
-          <div className="mb-4">
-            <button
-              onClick={() =>
-                setViewMode((prev) =>
-                  prev === "marker" ? "cluster" : "marker"
-                )
-              }
-              className="bg-blue-600 text-white px-4 py-2 rounded mr-2"
-            >
-              Toggle to {viewMode === "marker" ? "Cluster View" : "Map View"}
-            </button>
-
-            <button
-              onClick={runClustering}
-              className="bg-green-600 text-white px-4 py-2 rounded"
-              disabled={loadingClusters}
-            >
-              {loadingClusters ? "Clustering..." : "Run Clustering"}
-            </button>
-
-            {successMessage && (
-              <p className="mt-2 text-green-600 font-medium">
-                {successMessage}
-              </p>
-            )}
+    <div className="modern-app-bg">
+      <div className="modern-header">
+        <img src={logo} alt="GigWise Logo" className="modern-logo" />
+        <span className="modern-title">GigWise</span>
+        {user && (
+          <div className="modern-user-info">
+            <span className="modern-user-name">{user.displayName}</span>
+            <button onClick={logout} className="modern-logout-btn">Logout</button>
           </div>
-
-          <LoadScript
-            googleMapsApiKey={import.meta.env.VITE_GOOGLE_API_KEY}
-            libraries={libraries}
-          >
-            {viewMode === "marker" ? (
-              <MapView deliveries={deliveries} />
-            ) : (
-              <MapClusters />
-            )}
+        )}
+      </div>
+      <div className="modern-main-content">
+        {user ? (
+          <>
+            <div className="modern-card-row">
+              <DeliveryUploader onUploadComplete={fetchDeliveries} />
+              <div className="modern-map-card">
+                <div className="modern-map-controls">
+                  <button
+                    onClick={() => setViewMode((prev) => prev === "marker" ? "cluster" : "marker")}
+                    className="modern-toggle-btn"
+                  >
+                    {viewMode === "marker" ? "Cluster View" : "Map View"}
+                  </button>
+                  <button
+                    onClick={runClustering}
+                    className="modern-action-btn"
+                    disabled={loadingClusters}
+                  >
+                    {loadingClusters ? "Clustering..." : "Run Clustering"}
+                  </button>
+                  {successMessage && (
+                    <span className="modern-success-msg">{successMessage}</span>
+                  )}
+                </div>
+                <LoadScript
+                  googleMapsApiKey={import.meta.env.VITE_GOOGLE_API_KEY}
+                  libraries={libraries}
+                >
+                  {viewMode === "marker" ? (
+                    <MapView deliveries={deliveries} />
+                  ) : (
+                    <MapClusters />
+                  )}
+                </LoadScript>
+              </div>
+            </div>
             <AIDeliveryAssistant />
-          </LoadScript>
-
-        </>
-      ) : (
-        <>
-          <h1 className="text-3xl font-bold mb-4">GigWise</h1>
-          <button
-            onClick={login}
-            className="bg-green-600 text-white px-6 py-2 rounded"
-          >
-            Sign in with Google
-          </button>
-        </>
-      )}
+          </>
+        ) : (
+          <div className="modern-login-card">
+            <h1 className="modern-login-title">Welcome to GigWise</h1>
+            <button onClick={login} className="modern-google-btn">
+              <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="modern-google-icon" />
+              Sign in with Google
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

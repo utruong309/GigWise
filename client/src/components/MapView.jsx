@@ -4,10 +4,14 @@ import {
   Marker,
   HeatmapLayer,
 } from '@react-google-maps/api';
+import '../ModernUI.css';
 
 const containerStyle = {
   width: '100%',
   height: '500px',
+  borderRadius: '1.5rem',
+  boxShadow: '0 8px 32px rgba(31, 38, 135, 0.2)',
+  overflow: 'hidden',
 };
 
 const center = {
@@ -28,16 +32,13 @@ const MapView = ({ deliveries }) => {
   }));
 
   return (
-    <div>
+    <div className="modern-map-container">
       <button
-        onClick={() =>
-          setMode((prev) => (prev === 'marker' ? 'heatmap' : 'marker'))
-        }
-        style={{ marginBottom: '1rem' }}
+        onClick={() => setMode((prev) => (prev === 'marker' ? 'heatmap' : 'marker'))}
+        className="modern-floating-toggle"
       >
-        Switch to {mode === 'marker' ? 'Heatmap' : 'Marker'} View
+        {mode === 'marker' ? 'Heatmap' : 'Marker'} View
       </button>
-
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
@@ -49,6 +50,10 @@ const MapView = ({ deliveries }) => {
               key={i}
               position={{ lat: d.lat, lng: d.lng }}
               title={`Tip: $${d.tip} | Platform: ${d.platform}`}
+              icon={{
+                url: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+                scaledSize: new window.google.maps.Size(32, 32),
+              }}
             />
           ))
         ) : (

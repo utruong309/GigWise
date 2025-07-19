@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { getAuth } from 'firebase/auth';
+import '../ModernUI.css';
 
 export default function AIDeliveryAssistant() {
   const [question, setQuestion] = useState('');
@@ -31,20 +32,24 @@ export default function AIDeliveryAssistant() {
   };
 
   return (
-    <div className="mt-8">
-      <h3 className="text-xl font-bold mb-2">💬 Ask GigWise AI</h3>
-      <input
-        type="text"
-        value={question}
-        onChange={(e) => setQuestion(e.target.value)}
-        placeholder="Ask a question..."
-        className="w-full p-2 border rounded"
-      />
-      <button onClick={askAI} className="bg-purple-600 text-white px-4 py-2 mt-2 rounded">
-        Ask
-      </button>
-      {loading && <p className="text-gray-500">Thinking...</p>}
-      {response && <div className="bg-gray-100 p-4 mt-2 rounded">{response}</div>}
+    <div className="modern-ai-assistant">
+      <div className="modern-ai-card">
+        <h3 className="modern-ai-title">💬 Ask GigWise AI</h3>
+        <div className="modern-ai-input-row">
+          <input
+            type="text"
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+            placeholder="Ask a question..."
+            className="modern-ai-input"
+          />
+          <button onClick={askAI} className="modern-ai-send-btn">
+            <span role="img" aria-label="send">🚀</span>
+          </button>
+        </div>
+        {loading && <div className="modern-ai-loading"><span className="modern-dot"></span><span className="modern-dot"></span><span className="modern-dot"></span></div>}
+        {response && <div className="modern-ai-response-bubble">{response}</div>}
+      </div>
     </div>
   );
 }
