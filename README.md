@@ -10,4 +10,3 @@
 [![LangChain](https://img.shields.io/badge/LangChain-AI%20Framework-purple.svg)](https://langchain.com/)
 [![Scikit-learn](https://img.shields.io/badge/Scikit--learn-ML-orange.svg)](https://scikit-learn.org/)
 [![Vite](https://img.shields.io/badge/Vite-Build%20Tool-yellow.svg)](https://vitejs.dev/)
-[![Express](https://img.shields.io/badge/Express-Web%20Framework-black.svg)](https://expressjs.com/)
