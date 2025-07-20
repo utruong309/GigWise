@@ -59,7 +59,7 @@ Before you begin, ensure you have the following installed:
 - Git (optional, for cloning the repository)
 - MongoDB Atlas account
 - Google Cloud Platform account
-- Firebase project
+- Firebase
 
 ### 1. Clone the Repository
 
