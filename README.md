@@ -10,3 +10,5 @@
 [![LangChain](https://img.shields.io/badge/LangChain-AI%20Framework-purple.svg)](https://langchain.com/)
 [![Scikit-learn](https://img.shields.io/badge/Scikit--learn-ML-orange.svg)](https://scikit-learn.org/)
 [![Vite](https://img.shields.io/badge/Vite-Build%20Tool-yellow.svg)](https://vitejs.dev/)
+
+Smart delivery tracking platform for gig drivers to track performance, identify high-earning clusters, and optimize their routes using advanced AI and machine learning algorithms.
