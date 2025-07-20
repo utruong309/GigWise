@@ -131,21 +131,3 @@ npm run dev
 The client will run on `http://localhost:5173`
 
 The application will start on `http://localhost:5173`. Open this URL in your browser to view the app.
-
-## 🔌 API Endpoints
-
-### Authentication
-- `POST /api/auth/login` - Google OAuth authentication
-- `GET /api/auth/verify` - Verify JWT token
-
-### Deliveries
-- `GET /api/deliveries/all` - Get all deliveries for authenticated user
-- `POST /api/deliveries` - Create new delivery (manual form)
-- `POST /api/deliveries/upload` - Upload CSV delivery data
-
-### Clustering
-- `POST /api/clusters/run` - Run DBSCAN clustering algorithm
-- `GET /api/clusters` - Get cluster data for map visualization
-
-### AI Assistant
-- `POST /api/ask-ai` - Ask questions to the AI assistant
