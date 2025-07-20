@@ -1,4 +1,4 @@
-# 🚚 GigWise - Smart Delivery Tracking Platform
+# 🚚 GigWise - Google Maps Platform Awards
 
 [![React](https://img.shields.io/badge/React-19.1.0-blue.svg)](https://reactjs.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-Express-green.svg)](https://nodejs.org/)
