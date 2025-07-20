@@ -34,10 +34,15 @@ Ask questions about your delivery data and receive intelligent responses powered
 
 ## 🛠️ Technologies Used 
 **Frontend**: React 19.1.0, Vite, Google Maps API, Firebase Auth, Modern CSS
+
 **Backend**: Node.js, Express.js, MongoDB with Mongoose ODM
+
 **Database**: MongoDB Atlas for scalable cloud storage
+
 **AI & Analytics**: Python, Scikit-learn (DBSCAN clustering), Google Generative AI (Gemini), LangChain
+
 **Authentication**: Firebase Auth, Google OAuth, JWT tokens
+
 **Infrastructure**: Google Cloud Platform, Firebase hosting
 
 ## 🎬 How to Run the Code
