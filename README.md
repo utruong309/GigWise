@@ -117,7 +117,7 @@ pip install pymongo scikit-learn shapely numpy python-dotenv certifi
 **Start the Backend Server:**
 ```bash
 cd server
-npm start
+node server.js
 ```
 The server will run on `http://localhost:3001`
 
