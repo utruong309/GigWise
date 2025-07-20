@@ -1,20 +1,26 @@
 import admin from 'firebase-admin';
-import fs from 'fs';
-import path from 'path';
 import dotenv from 'dotenv';
 dotenv.config();
 
-// Read service account key from local JSON file
-const serviceAccount = JSON.parse(
-  fs.readFileSync(path.resolve('./gigwise-firebase.json'), 'utf-8')
-);
+// Read service account from base64 environment variable
+let serviceAccount;
 
-// Initialize Firebase Admin SDK
 if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-  });
-  console.log('Firebase Admin initialized');
+  try {
+    const base64 = process.env.FIREBASE_CONFIG_BASE64;
+    if (!base64) throw new Error('Missing FIREBASE_CONFIG_BASE64 env variable');
+
+    const jsonString = Buffer.from(base64, 'base64').toString('utf-8');
+    serviceAccount = JSON.parse(jsonString);
+
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+    });
+
+    console.log('Firebase Admin initialized');
+  } catch (error) {
+    console.error('Firebase Admin initialization failed:', error.message);
+  }
 }
 
 // Middleware to verify Firebase ID token
