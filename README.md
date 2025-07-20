@@ -12,30 +12,12 @@
 
 #### **Marker View** 📍
 - **Purpose**: Individual delivery point visualization for detailed analysis
-- **Benefits for Drivers**:
-  - See exact locations of each delivery with earnings data
-  - View tip amounts and platform information on hover
-  - Track individual delivery performance and customer preferences
-  - Plan specific routes between individual stops
-  - Analyze which areas have the best tips and ratings
 
 #### **Heatmap View** 🔥
 - **Purpose**: Visual representation of delivery density and tip intensity
-- **Benefits for Drivers**:
-  - Instantly identify the most active delivery zones
-  - See which areas have the highest concentration of orders
-  - Understand tip patterns across different neighborhoods
-  - Make informed decisions about where to position themselves during slow periods
-  - Optimize their base location for maximum order volume
 
 #### **Cluster View** 🎯
 - **Purpose**: AI-powered clustering to identify profitable delivery zones
-- **Benefits for Drivers**:
-  - Discover hidden profitable areas they might have missed
-  - View cluster polygons with earnings and tip data
-  - See total earnings and average tips per cluster
-  - Identify most active hours for each cluster
-  - Make data-driven decisions about which zones to focus on
 
 ### 2. AI-Powered Route Optimization 🎤
 **Smart Clustering Algorithm**: Our DBSCAN clustering algorithm analyzes your delivery data to identify profitable zones and optimal delivery patterns.
