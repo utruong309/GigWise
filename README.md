@@ -13,6 +13,8 @@
 
 Smart delivery tracking platform for gig drivers to track performance, identify high-earning clusters, and optimize their routes using advanced AI and machine learning algorithms.
 
+https://github.com/user-attachments/assets/64ef9afd-ec8b-4e0c-9214-3e3bc4dde796
+
 ## 🚀 Main Features 
 ### 1. Interactive Mapping 🗺️
 **Multi-View Mapping System**: Unlike other platforms that offer basic location tracking, GigWise provides three distinct mapping views, each designed for specific driver needs:
