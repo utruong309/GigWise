@@ -2,7 +2,6 @@ import admin from 'firebase-admin';
 import dotenv from 'dotenv';
 dotenv.config();
 
-// Read service account from base64 environment variable
 let serviceAccount;
 
 if (!admin.apps.length) {
@@ -23,7 +22,6 @@ if (!admin.apps.length) {
   }
 }
 
-// Middleware to verify Firebase ID token
 export const verifyFirebaseToken = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
@@ -35,7 +33,7 @@ export const verifyFirebaseToken = async (req, res, next) => {
 
   try {
     const decodedToken = await admin.auth().verifyIdToken(idToken);
-    req.user = decodedToken; // contains uid, email, etc.
+    req.user = decodedToken; 
     next();
   } catch (err) {
     console.error('Token verification failed:', err.message);
